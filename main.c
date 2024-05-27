@@ -22,9 +22,9 @@ typedef struct
 } KOMORKA;
 
 ALLEGRO_FONT* czcionka = NULL; // Zmienna globalna przechowujaca wczytana czcionke
-ALLEGRO_BITMAP* obraz[4] = { NULL }; // Tablica bitmap przechowuj¹ca obrazy
-time_t start_time; // Czas rozpoczêcia gry
-time_t end_time; // Czas zakoñczenia gry
+ALLEGRO_BITMAP* obraz[4] = { NULL }; // Tablica bitmap przechowujÄ…ca obrazy
+time_t start_time; // Czas rozpoczÄ™cia gry
+time_t end_time; // Czas zakoÅ„czenia gry
 
 // Funkcja inicjalizujaca plansze, ustawiajaca wszystkie komorki na poczatkowe wartosci
 void inicjalizacja_Planszy(KOMORKA macierz[][TRUDNY_ROZMIAR], int rozmiar)
@@ -41,7 +41,7 @@ void inicjalizacja_Planszy(KOMORKA macierz[][TRUDNY_ROZMIAR], int rozmiar)
 	}
 }
 
-// Funkcja ustawiaj¹ca miny na planszy
+// Funkcja ustawiajÄ…ca miny na planszy
 void ustaw_Miny(KOMORKA macierz[][TRUDNY_ROZMIAR], int rozmiar, int liczbaMin)
 {
 	int postawioneMiny = 0;
@@ -57,7 +57,7 @@ void ustaw_Miny(KOMORKA macierz[][TRUDNY_ROZMIAR], int rozmiar, int liczbaMin)
 	}
 }
 
-// Funkcja obliczaj¹ca liczbê min s¹siaduj¹cych z ka¿d¹ komórk¹
+// Funkcja obliczajÄ…ca liczbÄ™ min sÄ…siadujÄ…cych z kaÅ¼dÄ… komÃ³rkÄ…
 void oblicz_Sasiadujace(KOMORKA macierz[][TRUDNY_ROZMIAR], int rozmiar)
 {
 	// Iteracja po wszystkich komorkach planszy
@@ -88,12 +88,12 @@ void oblicz_Sasiadujace(KOMORKA macierz[][TRUDNY_ROZMIAR], int rozmiar)
 	}
 }
 
-// Funkcja rysuj¹ca pojedyncz¹ komórkê na planszy
+// Funkcja rysujÄ…ca pojedynczÄ… komÃ³rkÄ™ na planszy
 void rysuj_Komorke(KOMORKA komorka, int x, int y)
 {
 	if (komorka.czyOdkryta == 1)
 	{
-		// Nieodkryta komórka
+		// Nieodkryta komÃ³rka
 		al_draw_filled_rectangle(x, y, x + KOMORKA_ROZMIAR, y + KOMORKA_ROZMIAR, al_map_rgb(192, 192, 192));
 
 		//Rysowanie flagi
@@ -104,10 +104,10 @@ void rysuj_Komorke(KOMORKA komorka, int x, int y)
 	}
 	else
 	{
-		// Odkryta komórka
+		// Odkryta komÃ³rka
 		al_draw_filled_rectangle(x, y, x + KOMORKA_ROZMIAR, y + KOMORKA_ROZMIAR, al_map_rgb(255, 255, 255));
 
-		// Rysowanie miny lub liczby s¹siaduj¹cych min, jeœli komórka nie zawiera miny
+		// Rysowanie miny lub liczby sÄ…siadujÄ…cych min, jeÅ›li komÃ³rka nie zawiera miny
 		if (komorka.czyMina == 1)
 		{
 			al_draw_bitmap(obraz[1], x + KOMORKA_ROZMIAR / 2 - 15, y + KOMORKA_ROZMIAR / 2 - 15, ALLEGRO_ALIGN_CENTER);
@@ -118,18 +118,18 @@ void rysuj_Komorke(KOMORKA komorka, int x, int y)
 			}
 		}
 	}
-	// Rysowanie ramki wokó³ komórki
+	// Rysowanie ramki wokÃ³Å‚ komÃ³rki
 	al_draw_rectangle(x, y, x + KOMORKA_ROZMIAR, y + KOMORKA_ROZMIAR, al_map_rgb(0, 0, 0), 1);
 }
 
-// Funkcja rysuj¹ca ca³¹ planszê
+// Funkcja rysujÄ…ca caÅ‚Ä… planszÄ™
 void rysuj_Plansze(KOMORKA macierz[][TRUDNY_ROZMIAR], int rozmiar)
 {
 	for (int i = 0; i < rozmiar; i++)
 	{
 		for (int j = 0; j < rozmiar; j++)
 		{
-			// Rysowanie pojedynczej komórki
+			// Rysowanie pojedynczej komÃ³rki
 			rysuj_Komorke(macierz[i][j], i * KOMORKA_ROZMIAR, j * KOMORKA_ROZMIAR);
 		}
 	}
@@ -149,7 +149,7 @@ void Odkryj_Komorke(KOMORKA macierz[][TRUDNY_ROZMIAR], int rozmiar, int x, int y
 		{
 			for (int dy = -1; dy <= 1; dy++)
 			{
-				// Rekurencyjne odkrywanie s¹siedniej komórki, jeœli s¹siaduj¹ca komórka nie zawiera miny
+				// Rekurencyjne odkrywanie sÄ…siedniej komÃ³rki, jeÅ›li sÄ…siadujÄ…ca komÃ³rka nie zawiera miny
 				Odkryj_Komorke(macierz, rozmiar, x + dx, y + dy, pozostaleKomorki);
 			}
 		}
@@ -165,9 +165,9 @@ main()
 	int liczbaMin = 0;
 	int rozmiar = 0;
 
-	ALLEGRO_DISPLAY* display = NULL; // WskaŸnik na obiekt reprezentuj¹cy wyœwietlacz
-	ALLEGRO_EVENT_QUEUE* event_queue = NULL; // WskaŸnik na kolejkê zdarzeñ
-	ALLEGRO_MOUSE_CURSOR* cursor = NULL; //WskaŸnik na kursor
+	ALLEGRO_DISPLAY* display = NULL; // WskaÅºnik na obiekt reprezentujÄ…cy wyÅ›wietlacz
+	ALLEGRO_EVENT_QUEUE* event_queue = NULL; // WskaÅºnik na kolejkÄ™ zdarzeÅ„
+	ALLEGRO_MOUSE_CURSOR* cursor = NULL; //WskaÅºnik na kursor
 	ALLEGRO_SAMPLE* sample = NULL;
 	ALLEGRO_SAMPLE_INSTANCE* sampleInstance = NULL;
 
@@ -180,7 +180,7 @@ main()
 	al_install_audio();
 	al_init_image_addon();
 
-	// Tworzenie okna wyœwietlacza
+	// Tworzenie okna wyÅ›wietlacza
 	display = al_create_display(TRUDNY_ROZMIAR * KOMORKA_ROZMIAR, TRUDNY_ROZMIAR * KOMORKA_ROZMIAR);
 	if (!display)
 	{
@@ -188,7 +188,7 @@ main()
 		return -1;
 	}
 
-	// Wczytywanie obrazu reprezentuj¹cego logo
+	// Wczytywanie obrazu reprezentujÄ…cego logo
 	obraz[0] = al_load_bitmap("saper.png");
 	if (!obraz[0])
 	{
@@ -230,7 +230,7 @@ main()
 		return -1;
 	}
 
-	// Tworzenie kolejki zdarzeñ
+	// Tworzenie kolejki zdarzeÅ„
 	event_queue = al_create_event_queue();
 	if (!event_queue)
 	{
@@ -246,7 +246,7 @@ main()
 	al_attach_sample_instance_to_mixer(sampleInstance, al_get_default_mixer());
 	al_set_sample_instance_gain(sampleInstance, 0.2);
 
-	// Rejestrowanie Ÿróde³ zdarzeñ dla okna wyœwietlacza i myszy
+	// Rejestrowanie ÅºrÃ³deÅ‚ zdarzeÅ„ dla okna wyÅ›wietlacza i myszy
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
@@ -254,7 +254,7 @@ main()
 	// Ustawienie kursora na ekranie
 	al_set_mouse_cursor(display, cursor);
 
-	czcionka = al_create_builtin_font(); // U¿ycie wbudowanej czcionki
+	czcionka = al_create_builtin_font(); // UÅ¼ycie wbudowanej czcionki
 	if (!czcionka)
 	{
 		printf("Nie udalo sie utworzyc czcionki!\n");
@@ -262,10 +262,10 @@ main()
 		return -1;
 	}
 
-	// Pêtla g³ówna programu
+	// PÄ™tla gÅ‚Ã³wna programu
 	while (wydarzenie == 0)
 	{
-		// Rysowanie menu wyboru poziomu trudnoœci
+		// Rysowanie menu wyboru poziomu trudnoÅ›ci
 		al_clear_to_color(al_map_rgb(50, 50, 50));
 		al_draw_bitmap(obraz[0], al_get_display_width(display) / 2 - al_get_bitmap_width(obraz[0]) / 2, al_get_display_height(display) / 2 - al_get_bitmap_height(obraz[0]) / 2 - 225, 0);
 		al_draw_text(czcionka, al_map_rgb(128, 255, 255), al_get_display_width(display) / 2, al_get_display_height(display) / 2 - 185, ALLEGRO_ALIGN_CENTER, "Wybierz poziom trudnosci:");
@@ -281,19 +281,19 @@ main()
 
 		al_play_sample_instance(sampleInstance);//odpalenie muzyki w tle
 
-		// Obs³uga zamkniêcia okna
+		// ObsÅ‚uga zamkniÄ™cia okna
 		if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 		{
 			break;
 		}
 
-		// Obs³uga klikniêæ myszy
+		// ObsÅ‚uga klikniÄ™Ä‡ myszy
 		if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 		{
 			int x = event.mouse.x;
 			int y = event.mouse.y;
 
-			// Obs³uga wyboru poziomu trudnoœci
+			// ObsÅ‚uga wyboru poziomu trudnoÅ›ci
 			if (x >= al_get_display_width(display) / 2 - 30 && x <= al_get_display_width(display) / 2 + 30)
 			{
 				if (y >= al_get_display_height(display) / 2 - 170 && y <= al_get_display_height(display) / 2 - 150)
@@ -326,7 +326,7 @@ main()
 					wydarzenie = 4;
 				}
 			}
-			// Obs³uga przycisku wyjœcia
+			// ObsÅ‚uga przycisku wyjÅ›cia
 			if (x >= al_get_display_width(display) - 60 && x <= al_get_display_width(display))
 			{
 				if (y >= al_get_display_height(display) / 2 + 250 && y <= al_get_display_height(display) / 2 + 270)
@@ -339,10 +339,10 @@ main()
 		int czas_gry;
 		bool czas_zapisany = false;
 
-		// Obs³uga wydarzenia wybrania poziomu trudnoœci
+		// ObsÅ‚uga wydarzenia wybrania poziomu trudnoÅ›ci
 		if (wydarzenie == 1)
 		{
-			KOMORKA macierz[TRUDNY_ROZMIAR][TRUDNY_ROZMIAR]; // Deklaracja macierzy reprezentuj¹cej planszê
+			KOMORKA macierz[TRUDNY_ROZMIAR][TRUDNY_ROZMIAR]; // Deklaracja macierzy reprezentujÄ…cej planszÄ™
 
 			inicjalizacja_Planszy(macierz, rozmiar);
 			ustaw_Miny(macierz, rozmiar, liczbaMin);
@@ -350,11 +350,11 @@ main()
 
 			int pozostaleKomorki = rozmiar * rozmiar - liczbaMin;
 
-			// Pocz¹tek pomiaru czasu
+			// PoczÄ…tek pomiaru czasu
 			int start = al_get_time();
 
 
-			// Pêtla obs³uguj¹ca g³ówn¹ mechanikê gry
+			// PÄ™tla obsÅ‚ugujÄ…ca gÅ‚Ã³wnÄ… mechanikÄ™ gry
 			while (wydarzenie == 1)
 			{
 				al_clear_to_color(al_map_rgb(192, 192, 192));
@@ -364,24 +364,24 @@ main()
 				ALLEGRO_EVENT event;
 				al_wait_for_event(event_queue, &event);
 
-				// Obs³uga zamkniêcia okna
+				// ObsÅ‚uga zamkniÄ™cia okna
 				if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 				{
 					break;
 				}
 
 
-				// Obs³uga klikniêæ myszy
+				// ObsÅ‚uga klikniÄ™Ä‡ myszy
 				if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 				{
 					int wiersz = event.mouse.x / KOMORKA_ROZMIAR;
 					int kolumna = event.mouse.y / KOMORKA_ROZMIAR;
 
-					if (event.mouse.button & 2) // Sprawdzanie, czy naciœniêty zosta³ prawy przycisk myszy
+					if (event.mouse.button & 2) // Sprawdzanie, czy naciÅ›niÄ™ty zostaÅ‚ prawy przycisk myszy
 					{
 						if (wiersz >= 0 && wiersz < rozmiar && kolumna >= 0 && kolumna < rozmiar)
 						{
-							// Stawianie flagi tylko dla nieodkrytych komórek
+							// Stawianie flagi tylko dla nieodkrytych komÃ³rek
 							if (macierz[wiersz][kolumna].czyOdkryta == 0)
 							{
 								macierz[wiersz][kolumna].czyFlaga = !macierz[wiersz][kolumna].czyFlaga; // Obracanie flagi
@@ -402,9 +402,9 @@ main()
 
 								if (macierz[wiersz][kolumna].czyOdkryta == 0 && macierz[wiersz][kolumna].czyFlaga == 0)
 								{
-									// Odkrycie komórki i aktualizacja pozosta³ych komórek
+									// Odkrycie komÃ³rki i aktualizacja pozostaÅ‚ych komÃ³rek
 									Odkryj_Komorke(macierz, rozmiar, wiersz, kolumna, &pozostaleKomorki);
-									printf("%d ", pozostaleKomorki); // Wyœwietlenie pozosta³ych komórek (dla celów testowych)
+									printf("%d ", pozostaleKomorki); // WyÅ›wietlenie pozostaÅ‚ych komÃ³rek (dla celÃ³w testowych)
 								}
 								// Sprawdzenie warunku wygranej
 								if (pozostaleKomorki == 0)
@@ -443,7 +443,7 @@ main()
 				{
 					char znak = event.keyboard.unichar;
 
-					// Sprawdzenie, czy wpisany znak jest liter¹ lub cyfr¹
+					// Sprawdzenie, czy wpisany znak jest literÄ… lub cyfrÄ…
 					if ((znak >= 'a' && znak <= 'z') || (znak >= 'A' && znak <= 'Z') || (znak >= '0' && znak <= '9'))
 					{
 						if (index < sizeof(nazwa_gracza) - 1)
@@ -452,16 +452,16 @@ main()
 							nazwa_gracza[index] = '\0';
 						}
 					}
-					else if (znak == '\b' && index > 0) // Obs³uga backspace
+					else if (znak == '\b' && index > 0) // ObsÅ‚uga backspace
 					{
 						nazwa_gracza[--index] = '\0';
 					}
-					else if (znak == '\r') // Obs³uga enter
+					else if (znak == '\r') // ObsÅ‚uga enter
 					{
 						imie_wpisane = true;
 					}
 
-					// Aktualizacja wyœwietlania tekstu
+					// Aktualizacja wyÅ›wietlania tekstu
 					al_clear_to_color(al_map_rgb(0, 192, 0));
 					al_draw_text(czcionka, al_map_rgb(0, 0, 0), al_get_display_width(display) / 2, al_get_display_height(display) / 2 - 30, ALLEGRO_ALIGN_CENTER, "Gratulacje! Wygrales!");
 					al_draw_text(czcionka, al_map_rgb(0, 0, 0), al_get_display_width(display) / 2, al_get_display_height(display) / 2, ALLEGRO_ALIGN_CENTER, "Wpisz swoje imie:");
@@ -475,7 +475,7 @@ main()
 				FILE* plik = NULL;
 				char* nazwa_pliku = NULL;
 
-				// Okreœlenie nazwy pliku w zale¿noœci od poziomu trudnoœci
+				// OkreÅ›lenie nazwy pliku w zaleÅ¼noÅ›ci od poziomu trudnoÅ›ci
 				if (rozmiar == LATWY_ROZMIAR)
 				{
 					nazwa_pliku = "czas_gry_latwy.txt";
@@ -499,7 +499,7 @@ main()
 					fscanf_s(plik, "%d", &najlepszy_czas);
 					fclose(plik);
 
-					// Porównanie z bie¿¹cym czasem gry
+					// PorÃ³wnanie z bieÅ¼Ä…cym czasem gry
 					if (czas_gry < najlepszy_czas || najlepszy_czas == 0)
 					{
 						// Zapis nowego najlepszego czasu i nazwy gracza
@@ -524,7 +524,7 @@ main()
 				czas_zapisany = true;
 			}
 
-			al_clear_to_color(al_map_rgb(192, 192, 20));
+			al_clear_to_color(al_map_rgb(0, 192, 0));
 			al_draw_text(czcionka, al_map_rgb(0, 0, 0), al_get_display_width(display) / 2, al_get_display_height(display) / 2 - 30, ALLEGRO_ALIGN_CENTER, "Twoj czas:");
 			al_draw_textf(czcionka, al_map_rgb(0, 0, 0), al_get_display_width(display) / 2, al_get_display_height(display) / 2, ALLEGRO_ALIGN_CENTER, "%d sekund", czas_gry);
 			al_draw_text(czcionka, al_map_rgb(0, 0, 0), al_get_display_width(display) / 2, al_get_display_height(display) / 2 + 30, ALLEGRO_ALIGN_CENTER, "Wcisnij klawisz aby kontynuowac");
@@ -552,7 +552,7 @@ main()
 			ALLEGRO_EVENT event;
 			al_wait_for_event(event_queue, &event);
 
-			// Obs³uga klikniêæ myszy
+			// ObsÅ‚uga klikniÄ™Ä‡ myszy
 			if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
 				if (event.mouse.button)
@@ -567,10 +567,10 @@ main()
 		{
 			al_clear_to_color(al_map_rgb(20, 192, 192));
 
-			// Wczytywanie i wyœwietlanie wyników z plików
+			// Wczytywanie i wyÅ›wietlanie wynikÃ³w z plikÃ³w
 			char* filenames[] = { "czas_gry_latwy.txt", "czas_gry_sredni.txt", "czas_gry_trudny.txt" };
 			char* poziomy[] = { "Latwy", "Sredni", "Trudny" };
-			int y_offset = 20; // pocz¹tkowy przesuniêcie w pionie
+			int y_offset = 20; // poczÄ…tkowy przesuniÄ™cie w pionie
 			char linia[256];
 
 			for (int i = 0; i < 3; i++) {
@@ -584,7 +584,7 @@ main()
 						y_offset += 20;
 					}
 					fclose(plik);
-					y_offset += 20; // dodatkowe przesuniêcie miêdzy poziomami
+					y_offset += 20; // dodatkowe przesuniÄ™cie miÄ™dzy poziomami
 				}
 			}
 
@@ -593,7 +593,7 @@ main()
 			ALLEGRO_EVENT event;
 			al_wait_for_event(event_queue, &event);
 
-			// Obs³uga klikniêæ myszy
+			// ObsÅ‚uga klikniÄ™Ä‡ myszy
 			if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
 				if (event.mouse.button)
