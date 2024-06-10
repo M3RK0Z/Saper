@@ -214,7 +214,7 @@ main()
 	}
 
 	obraz[3] = al_load_bitmap("kursor.png");
-	if (!obraz[2])
+	if (!obraz[3])
 	{
 		printf("Nie udalo sie wczytac obrazu!\n");
 		al_destroy_display(display);
@@ -404,7 +404,6 @@ main()
 								{
 									// Odkrycie komórki i aktualizacja pozostałych komórek
 									Odkryj_Komorke(macierz, rozmiar, wiersz, kolumna, &pozostaleKomorki);
-									printf("%d ", pozostaleKomorki); // Wyświetlenie pozostałych komórek (dla celów testowych)
 								}
 								// Sprawdzenie warunku wygranej
 								if (pozostaleKomorki == 0)
