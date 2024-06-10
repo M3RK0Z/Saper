@@ -91,7 +91,7 @@ void oblicz_Sasiadujace(KOMORKA macierz[][TRUDNY_ROZMIAR], int rozmiar)
 // Funkcja rysująca pojedynczą komórkę na planszy
 void rysuj_Komorke(KOMORKA komorka, int x, int y)
 {
-	if (komorka.czyOdkryta == 1)
+	if (komorka.czyOdkryta == 0)
 	{
 		// Nieodkryta komórka
 		al_draw_filled_rectangle(x, y, x + KOMORKA_ROZMIAR, y + KOMORKA_ROZMIAR, al_map_rgb(192, 192, 192));
